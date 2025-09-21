@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/display-api/display.display-api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/display-api/display.display-api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/display-core/display.display-core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/display-core/display.display-core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/display-test/display.display-test.main.iml" filepath="$PROJECT_DIR$/.idea/modules/display-test/display.display-test.main.iml" />
+    </modules>
+  </component>
+</project>
