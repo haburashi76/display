@@ -9,6 +9,7 @@ plugins {
 
 group = "io.github.haburashi76"
 version = "1.1"
+
 allprojects {
     repositories {
         mavenCentral()
@@ -16,11 +17,7 @@ allprojects {
 }
 rootProject.apply(plugin = "org.jetbrains.dokka")
 
-
-
-
 subprojects {
-
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {
@@ -57,7 +54,7 @@ listOf("api", "core").forEach { projectName ->
             coordinates(
                 groupId = "io.github.haburashi76",
                 artifactId = this@project.name,
-                version = "1.0.7"
+                version = "1.0.12"
             )
 
             pom {

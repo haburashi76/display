@@ -23,7 +23,6 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/display-api" />
             <option value="$PROJECT_DIR$/display-core" />
-            <option value="$PROJECT_DIR$/display-test" />
           </set>
         </option>
       </GradleProjectSettings>

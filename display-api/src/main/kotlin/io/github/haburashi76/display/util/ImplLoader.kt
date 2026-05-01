@@ -13,7 +13,7 @@ object ImplLoader {
             val constructor = ConstructorUtils.getMatchingAccessibleConstructor(internalClass)
             constructor.newInstance() as T
         } catch (exception: ClassNotFoundException) {
-            throw UnsupportedOperationException("${clazz.name} a does not have implement", exception)
+            throw UnsupportedOperationException("${clazz.name} can`t find implementation class", exception)
         } catch (exception: IllegalAccessException) {
             throw UnsupportedOperationException("${clazz.name} constructor is not visible")
         } catch (exception: InstantiationException) {

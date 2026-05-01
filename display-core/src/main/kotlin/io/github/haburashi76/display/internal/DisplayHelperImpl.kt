@@ -11,8 +11,10 @@ import net.kyori.adventure.text.TextComponent
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.BlockDisplay
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.ItemDisplay
 import org.bukkit.entity.TextDisplay
+import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Transformation
 import org.bukkit.util.Vector
@@ -22,18 +24,21 @@ class DisplayHelperImpl: DisplayHelper {
     override fun newBlockDisplay(
         material: Material,
         location: Location,
-        init: (SpecialBlockDisplay) -> Unit): SpecialBlockDisplay {
+        init: (SpecialBlockDisplay) -> Unit
+    ): SpecialBlockDisplay {
         val world = location.world
-        val spawned = world.spawn(location, BlockDisplay::class.java) { display ->
-            display.transformation = Transformation(
-                Vector3f(-0.5f, 0.0f, -0.5f),
-                display.transformation.leftRotation,
-                display.transformation.scale,
-                display.transformation.rightRotation
-            )
-            display.block = material.createBlockData()
+        val spawned = world.spawnEntity(location, EntityType.BLOCK_DISPLAY, CreatureSpawnEvent.SpawnReason.CUSTOM) { display ->
+            if (display is BlockDisplay) {
+                display.transformation = Transformation(
+                    Vector3f(-0.5f, 0.0f, -0.5f),
+                    display.transformation.leftRotation,
+                    display.transformation.scale,
+                    display.transformation.rightRotation
+                )
+                display.block = material.createBlockData()
+            }
         }
-        val special = SpecialBlockDisplayImpl(spawned)
+        val special = SpecialBlockDisplayImpl(spawned as BlockDisplay)
         init(special)
         return special
     }
@@ -44,10 +49,12 @@ class DisplayHelperImpl: DisplayHelper {
         init: (SpecialItemDisplay) -> Unit
     ): SpecialItemDisplay {
         val world = location.world
-        val spawned = world.spawn(location, ItemDisplay::class.java) { display ->
-            display.itemStack = ItemStack(material)
+        val spawned = world.spawnEntity(location, EntityType.ITEM_DISPLAY, CreatureSpawnEvent.SpawnReason.CUSTOM) { display ->
+            if (display is ItemDisplay) {
+                display.itemStack = ItemStack(material)
+            }
         }
-        val special = SpecialItemDisplayImpl(spawned)
+        val special = SpecialItemDisplayImpl(spawned as ItemDisplay)
         init(special)
         return special
     }
@@ -58,10 +65,12 @@ class DisplayHelperImpl: DisplayHelper {
         init: (SpecialTextDisplay) -> Unit
     ): SpecialTextDisplay {
         val world = location.world
-        val spawned = world.spawn(location, TextDisplay::class.java) { display ->
-            display.text(text)
+        val spawned = world.spawnEntity(location, EntityType.TEXT_DISPLAY, CreatureSpawnEvent.SpawnReason.CUSTOM) { display ->
+            if (display is TextDisplay) {
+                display.text(text)
+            }
         }
-        val special = SpecialTextDisplayImpl(spawned)
+        val special = SpecialTextDisplayImpl(spawned as TextDisplay)
         init(special)
         return special
     }
